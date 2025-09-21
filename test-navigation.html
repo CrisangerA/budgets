@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Navegación - Budget App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+        }
+        .section h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .link-list {
+            display: grid;
+            gap: 10px;
+        }
+        .test-link {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .test-link:hover {
+            background-color: #0056b3;
+        }
+        .debug-link {
+            background-color: #28a745;
+        }
+        .debug-link:hover {
+            background-color: #1e7e34;
+        }
+        .instructions {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .results {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test de Navegación - Budget App</h1>
+        
+        <div class="instructions">
+            <h4>📋 Instrucciones:</h4>
+            <ol>
+                <li><strong>Prueba MonthDetail:</strong> Haz clic en el enlace del mes Mayo 2024</li>
+                <li><strong>Navega a una semana:</strong> En la página del mes, haz clic en cualquier semana</li>
+                <li><strong>Observa el resultado:</strong> ¿Aparece "Semana no encontrada" o se carga correctamente?</li>
+                <li><strong>Prueba navegación directa:</strong> Usa los enlaces directos a semanas válidas</li>
+                <li><strong>Compara resultados:</strong> ¿Hay diferencia entre navegación desde MonthDetail vs navegación directa?</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h3>🏠 Páginas Principales</h3>
+            <div class="link-list">
+                <a href="http://localhost:5173/" class="test-link">🏠 Inicio (Home)</a>
+                <a href="http://localhost:5173/month/4e1eaf9f-b6bb-4db6-b89b-8fe990d10ddf" class="test-link">📅 Mayo 2024 (MonthDetail)</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>📊 Navegación Directa a Semanas Válidas</h3>
+            <div class="link-list">
+                <a href="http://localhost:5173/week/58322f4a-b1da-464d-a7d7-e0ff0f563a22" class="test-link">📋 Semana 1 - Mayo 2024 (Con pagos)</a>
+                <a href="http://localhost:5173/week/d0659f45-9917-470e-aef3-2de874ac9226" class="test-link">📋 Semana 2 - Mayo 2024</a>
+                <a href="http://localhost:5173/week/d522d921-eb3b-4c20-98ed-73d79a172a3a" class="test-link">📋 Semana 3 - Mayo 2024</a>
+                <a href="http://localhost:5173/week/f48c5eca-c511-4b0a-b634-b63c91a818f6" class="test-link">📋 Semana 4 - Mayo 2024</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>🔍 Páginas de Debug</h3>
+            <div class="link-list">
+                <a href="http://localhost:5173/debug/week/58322f4a-b1da-464d-a7d7-e0ff0f563a22" class="test-link debug-link">🐛 Debug Semana 1</a>
+                <a href="http://localhost:5173/debug/week/d0659f45-9917-470e-aef3-2de874ac9226" class="test-link debug-link">🐛 Debug Semana 2</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>❌ Test con ID Inválido</h3>
+            <div class="link-list">
+                <a href="http://localhost:5173/week/invalid-id-123" class="test-link" style="background-color: #dc3545;">❌ Semana con ID inválido</a>
+            </div>
+        </div>
+
+        <div class="results">
+            <h4>📝 Resultados Esperados:</h4>
+            <ul>
+                <li><strong>✅ Navegación directa a semanas válidas:</strong> Debe mostrar la página de WeekDetail con los datos de la semana</li>
+                <li><strong>✅ Navegación desde MonthDetail:</strong> Debe funcionar igual que la navegación directa</li>
+                <li><strong>❌ ID inválido:</strong> Debe mostrar "Semana no encontrada"</li>
+                <li><strong>🐛 Páginas de debug:</strong> Deben mostrar información detallada sobre la consulta</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>🔧 Información Técnica</h3>
+            <p><strong>IDs de semanas válidas encontradas en la base de datos:</strong></p>
+            <ul>
+                <li>Semana 1: <code>58322f4a-b1da-464d-a7d7-e0ff0f563a22</code> (Con 1 pago de $950)</li>
+                <li>Semana 2: <code>d0659f45-9917-470e-aef3-2de874ac9226</code> (Sin pagos)</li>
+                <li>Semana 3: <code>d522d921-eb3b-4c20-98ed-73d79a172a3a</code> (Sin pagos)</li>
+                <li>Semana 4: <code>f48c5eca-c511-4b0a-b634-b63c91a818f6</code> (Sin pagos)</li>
+            </ul>
+            <p><strong>Mes:</strong> Mayo 2024 (ID: <code>4e1eaf9f-b6bb-4db6-b89b-8fe990d10ddf</code>)</p>
+        </div>
+    </div>
+
+    <script>
+        // Agregar logs para debugging
+        console.log('🧪 Test de navegación cargado');
+        console.log('🔗 Enlaces disponibles para pruebas');
+        
+        // Interceptar clics para logging
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('test-link')) {
+                console.log('🔗 Navegando a:', e.target.href);
+                console.log('📝 Texto del enlace:', e.target.textContent);
+            }
+        });
+    </script>
+</body>
+</html>

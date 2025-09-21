@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import MonthDetail from './pages/MonthDetail';
 import WeekDetail from './pages/WeekDetail';
+import WeekDebug from './pages/WeekDebug';
 import Providers from './pages/Providers';
 
 /**
@@ -21,6 +22,9 @@ function App() {
           
           {/* Detalle de semana - Gestión de pagos */}
           <Route path="/week/:weekId" element={<WeekDetail />} />
+          
+          {/* Depuración de semanas */}
+          <Route path="/debug/week/:weekId" element={<WeekDebug />} />
           
           {/* Gestión de proveedores */}
           <Route path="/providers" element={<Providers />} />

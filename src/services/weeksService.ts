@@ -31,19 +31,26 @@ export class WeeksService {
    * @returns Promise con la semana encontrada
    */
   static async getById(id: string): Promise<Week | null> {
+    console.log('🔍 WeeksService.getById: Buscando semana con ID:', id);
+    
     const { data, error } = await supabase
       .from('weeks')
       .select('*')
       .eq('id', id)
       .single();
 
+    console.log('📊 WeeksService.getById: Resultado de consulta:', { data, error });
+
     if (error) {
       if (error.code === 'PGRST116') {
+        console.log('⚠️ WeeksService.getById: Semana no encontrada (PGRST116)');
         return null; // No encontrado
       }
+      console.error('❌ WeeksService.getById: Error en consulta:', error);
       throw new Error(`Error al obtener semana: ${error.message}`);
     }
 
+    console.log('✅ WeeksService.getById: Semana encontrada:', data);
     return data;
   }
 

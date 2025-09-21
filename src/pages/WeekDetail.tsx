@@ -53,12 +53,17 @@ export default function WeekDetail() {
 
     try {
       setLoading(true);
+      console.log('🔍 WeekDetail: Cargando datos para weekId:', weekId);
+      
       const [weekData, paymentsData] = await Promise.all([
         WeeksService.getById(weekId),
         PaymentsService.getWithDetails(weekId)
       ]);
       
+      console.log('📊 WeekDetail: Datos obtenidos:', { weekData, paymentsData });
+      
       if (!weekData) {
+        console.error('❌ WeekDetail: Semana no encontrada para ID:', weekId);
         setError('Semana no encontrada');
         return;
       }
@@ -68,6 +73,7 @@ export default function WeekDetail() {
       setFormData(prev => ({ ...prev, week_id: weekId }));
       setError(null);
     } catch (err) {
+      console.error('💥 WeekDetail: Error al cargar datos:', err);
       setError(err instanceof Error ? err.message : 'Error al cargar los datos de la semana');
     } finally {
       setLoading(false);

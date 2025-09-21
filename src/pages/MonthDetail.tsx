@@ -4,6 +4,7 @@ import { Plus, Calendar, DollarSign, CreditCard, ArrowLeft, Trash2, Edit } from 
 import { MonthsService } from '../services/monthsService';
 import { WeeksService } from '../services/weeksService';
 import { Breadcrumbs } from '../components/Breadcrumbs';
+import { Header } from '../components';
 import type { Month, Week, CreateWeekData, WeekWithPayments } from '../types';
 
 /**
@@ -150,34 +151,20 @@ export default function MonthDetail() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center space-x-4">
-              <button
-                onClick={() => navigate('/')}
-                className="inline-flex items-center text-gray-500 hover:text-gray-700 transition-colors"
-              >
-                <ArrowLeft className="h-5 w-5 mr-1" />
-                Volver
-              </button>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900">
-                  {month.name} {month.year}
-                </h1>
-                <p className="mt-1 text-sm text-gray-500">Detalle semanal de créditos</p>
-              </div>
-            </div>
-            <button
-              onClick={() => setShowCreateForm(true)}
-              className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
-            >
-              <Plus className="h-4 w-4 mr-2" />
-              Agregar Semana
-            </button>
-          </div>
-        </div>
-      </div>
+      <Header
+        title={`${month.name} ${month.year}`}
+        subtitle="Detalle semanal de créditos"
+        showBackButton={true}
+        onBackClick={() => navigate('/')}
+        actions={[
+          {
+            label: "Agregar Semana",
+            onClick: () => setShowCreateForm(true),
+            icon: Plus,
+            variant: "primary"
+          }
+        ]}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumbs */}

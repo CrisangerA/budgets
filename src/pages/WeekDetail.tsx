@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Plus, Search, DollarSign, CreditCard, Calendar, Edit, Trash2, User } from 'lucide-react';
+import { Plus, Search, DollarSign, CreditCard, Calendar, Edit, Trash2, User, ArrowLeft } from 'lucide-react';
 import { WeeksService } from '../services/weeksService';
 import { PaymentsService } from '../services/paymentsService';
 import { ProvidersService } from '../services/providersService';

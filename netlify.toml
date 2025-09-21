@@ -1,0 +1,39 @@
+[build]
+  # Comando de construcción
+  command = "pnpm run build"
+  # Directorio de salida
+  publish = "dist"
+  # Comando de instalación
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF ."
+
+[build.environment]
+  # Versión de Node.js
+  NODE_VERSION = "20"
+  # Habilitar pnpm
+  NPM_FLAGS = "--version"
+  PNPM_VERSION = "latest"
+
+# Configuración de redirects para SPA
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers de cache para assets
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Headers de seguridad
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Variables de entorno (configurar en Netlify UI)
+# VITE_SUPABASE_URL = "your_supabase_url"
+# VITE_SUPABASE_ANON_KEY = "your_supabase_anon_key"
